@@ -1,18 +1,20 @@
 import pandas as pd
 
 df = pd.read_csv(
-    r'C:\Users\Aref\Desktop\برنامه زمانی بوتکمپ Data science&Machine learning - برنامه کلاسی.csv')
+    r'/Users/arefshojaei/Downloads/data science.csv')
 times = df[df.columns[5]].values.tolist()
 # print(times)
-fixed_times = []
+fixed_times_s = []
+fixed_times_e = []
 for i in times:
     if type(i) == str:
-        fixed_times.append({'s': i[:5], 'e': i[-5:]})
+        fixed_times_s.append(i[:5])
+        fixed_times_e.append(i[-5:])
     else:
-        fixed_times.append(None)
+        fixed_times_s.append(None)
+        fixed_times_e.append(None)
 
-changed_times = pd.DataFrame(fixed_times, columns=[df.columns[5]])
+df['s'] = fixed_times_s
+df['e'] = fixed_times_e
 
-# df[df.columns[5]] = changed_times
-
-# df.to_csv(r'C:\Users\Aref\Desktop\class sheet fixed.csv')
+df.to_csv(r'/Users/arefshojaei/Downloads/data science fixed.csv')
